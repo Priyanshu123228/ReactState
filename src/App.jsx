@@ -8,6 +8,7 @@ function App() {
     <>
        <p>State in reacts</p>
       <LikeButton/>
+      <Counter/>
     </>
   )
 }
