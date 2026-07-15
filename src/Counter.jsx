@@ -20,7 +20,6 @@ export default function Counter(){
             <h3>count={count}</h3>
             <button onClick={counterIncrease}>Increase count</button>
         </div>
-        
     );
 }
 
