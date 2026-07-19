@@ -20,40 +20,57 @@ export default function TodoList() {
 
     }
     let upperCaseAll = () => {
-    setTodos((todos) =>
-        todos.map((todo) => {
-            return {
-                ...todo,
-                task: todo.task.toUpperCase(),
-            };
-        })
-    );
-};
+        setTodos((prevTodos) =>
+            prevTodos.map((todo) => {
+                return {
+                    ...todo,
+                    task: todo.task.toUpperCase(),
+                };
+            })
+        );
+    };
+
+    let upperCaseOne = (id) => {
+        setTodos((prevTodos) =>
+            prevTodos.map((todo) => {
+                if (todo.id == id) {
+                    return {
+                        ...todo,
+                        task: todo.task.toUpperCase(),
+                    };
+                } else {
+                    return todo;
+                }
+
+            })
+        );
+    }
 
 
-return (
-    <div>
-        <input placeholder="Add a task" value={newTodo} onChange={updateTodoValue}></input>
-        <br></br><br></br>
-        <button onClick={addNewTask} >Add Task</button>
-        <br></br>
-        <br></br>
-        <br></br>
-        <hr></hr>
-        <h4>Task Todo</h4>
-        <ul>
-            {
-                todos.map((todo) => (
-                    <li key={todo.id}>
-                        <span>{todo.task}</span>
-                        &nbsp;&nbsp;&nbsp;
-                        <button onClick={() => deleteTodo(todo.id)}>Delete</button>
-                    </li>
-                ))
-            }
-        </ul>
-        <br></br>
-        <button onClick={upperCaseAll}>Upper Case</button>
-    </div>
-)
+    return (
+        <div>
+            <input placeholder="Add a task" value={newTodo} onChange={updateTodoValue}></input>
+            <br></br><br></br>
+            <button onClick={addNewTask} >Add Task</button>
+            <br></br>
+            <br></br>
+            <br></br>
+            <hr></hr>
+            <h4>Task Todo</h4>
+            <ul>
+                {
+                    todos.map((todo) => (
+                        <li key={todo.id}>
+                            <span>{todo.task}</span>
+                            &nbsp;&nbsp;&nbsp;
+                            <button onClick={() => deleteTodo(todo.id)}>Delete</button>
+                            <button onClick={() => upperCaseOne(todo.id)}>UpperCase one</button>
+                        </li>
+                    ))
+                }
+            </ul>
+            <br></br>
+            <button onClick={upperCaseAll}>Upper Case</button>
+        </div>
+    )
 }
