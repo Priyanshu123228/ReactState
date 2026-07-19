@@ -7,11 +7,17 @@ export default function TodoList() {
     let [newTodo,setNewTodo]=useState(""); //to track what input has taken .Stores whatever user types.
 
     let addNewTask= ()=>{
-        setTodos([...todos,{task:newTodo,id:uuidv4()}]);
+        setTodos((prevTodos)=>{
+            return [...prevTodos,{task:newTodo,id:uuidv4()}];
+        });
         setNewTodo("");
     }
     let updateTodoValue=(event)=>{
         setNewTodo(event.target.value);
+    }
+    let deleteTodo=(id)=>{
+        setTodos((prevTodos)=>todos.filter((prevTodos)=>prevTodos.id != id));
+
     }
     return (
         <div>
@@ -26,7 +32,11 @@ export default function TodoList() {
             <ul>
                 {
                     todos.map((todo) => (
-                        <li key={todo.id}>{todo.task}</li>
+                        <li key={todo.id}>
+                            <span>{todo.task}</span>
+                            &nbsp;&nbsp;&nbsp;
+                            <button onClick={()=>deleteTodo(todo.id)}>Delete</button>
+                        </li>
                     ))
                 }
             </ul>
