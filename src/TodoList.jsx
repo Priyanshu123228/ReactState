@@ -29,6 +29,16 @@ export default function TodoList() {
             })
         );
     };
+    let markAllAsDone = () => {
+        setTodos((prevTodos) =>
+            prevTodos.map((todo) => {
+                return {
+                    ...todo,
+                    isDone:true,
+                };
+            })
+        );
+    };
 
     let upperCaseOne = (id) => {
         setTodos((prevTodos) =>
@@ -66,9 +76,8 @@ export default function TodoList() {
     return (
         <div>
             <input placeholder="Add a task" value={newTodo} onChange={updateTodoValue}></input>
-            <br></br><br></br>
-            <button onClick={addNewTask} >Add Task</button>
             <br></br>
+            <button onClick={addNewTask} >Add Task</button>
             <br></br>
             <br></br>
             <hr></hr>
@@ -78,9 +87,9 @@ export default function TodoList() {
                     todos.map((todo) => (
                         <li key={todo.id}>
                             <span style={todo.isDone?{textDecorationLine:"line-through"}:{}}>{todo.task}</span>
-                            &nbsp;&nbsp;&nbsp;
-                            <button onClick={() => deleteTodo(todo.id)}>Delete</button>
-                            <button onClick={() => upperCaseOne(todo.id)}>UpperCase one</button>
+                            &nbsp;&nbsp;
+                            <button onClick={() => deleteTodo(todo.id)}>Delete</button>&nbsp;&nbsp;
+                            <button onClick={() => upperCaseOne(todo.id)}>UpperCase one</button>&nbsp;&nbsp;
                             <button onClick={() => markAsDone(todo.id)}>mark as done</button>
                         </li>
                     ))
@@ -88,6 +97,8 @@ export default function TodoList() {
             </ul>
             <br></br>
             <button onClick={upperCaseAll}>Upper Case</button>
+            <br></br>
+            <button onClick={markAllAsDone}>Mark all as done</button>
         </div>
     )
 }
