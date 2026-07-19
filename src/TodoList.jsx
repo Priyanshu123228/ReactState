@@ -3,12 +3,12 @@ import { v4 as uuidv4 } from "uuid";
 
 
 export default function TodoList() {
-    let [todos, setTodos] = useState([{ task: "Sample task", id: uuidv4() }]);
+    let [todos, setTodos] = useState([{ task: "Sample task", id: uuidv4(),isDone:false }]);
     let [newTodo, setNewTodo] = useState(""); //to track what input has taken .Stores whatever user types.
 
     let addNewTask = () => {
         setTodos((prevTodos) => {
-            return [...prevTodos, { task: newTodo, id: uuidv4() }];
+            return [...prevTodos, { task: newTodo, id: uuidv4(),isDone:false }];
         });
         setNewTodo("");
     }
@@ -46,6 +46,22 @@ export default function TodoList() {
         );
     }
 
+    let markAsDone = (id) => {
+        setTodos((prevTodos) =>
+            prevTodos.map((todo) => {
+                if (todo.id == id) {
+                    return {
+                        ...todo,
+                        isDone:true,
+                    };
+                } else {
+                    return todo;
+                }
+
+            })
+        );
+    }
+
 
     return (
         <div>
@@ -61,10 +77,11 @@ export default function TodoList() {
                 {
                     todos.map((todo) => (
                         <li key={todo.id}>
-                            <span>{todo.task}</span>
+                            <span style={todo.isDone?{textDecorationLine:"line-through"}:{}}>{todo.task}</span>
                             &nbsp;&nbsp;&nbsp;
                             <button onClick={() => deleteTodo(todo.id)}>Delete</button>
                             <button onClick={() => upperCaseOne(todo.id)}>UpperCase one</button>
+                            <button onClick={() => markAsDone(todo.id)}>mark as done</button>
                         </li>
                     ))
                 }
