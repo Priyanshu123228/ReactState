@@ -3,43 +3,57 @@ import { v4 as uuidv4 } from "uuid";
 
 
 export default function TodoList() {
-    let [todos, setTodos] = useState([{task:"Sample task",id:uuidv4()}]);
-    let [newTodo,setNewTodo]=useState(""); //to track what input has taken .Stores whatever user types.
+    let [todos, setTodos] = useState([{ task: "Sample task", id: uuidv4() }]);
+    let [newTodo, setNewTodo] = useState(""); //to track what input has taken .Stores whatever user types.
 
-    let addNewTask= ()=>{
-        setTodos((prevTodos)=>{
-            return [...prevTodos,{task:newTodo,id:uuidv4()}];
+    let addNewTask = () => {
+        setTodos((prevTodos) => {
+            return [...prevTodos, { task: newTodo, id: uuidv4() }];
         });
         setNewTodo("");
     }
-    let updateTodoValue=(event)=>{
+    let updateTodoValue = (event) => {
         setNewTodo(event.target.value);
     }
-    let deleteTodo=(id)=>{
-        setTodos((prevTodos)=>todos.filter((prevTodos)=>prevTodos.id != id));
+    let deleteTodo = (id) => {
+        setTodos((prevTodos) => todos.filter((prevTodos) => prevTodos.id != id));
 
     }
-    return (
-        <div>
-            <input placeholder="Add a task" value={newTodo} onChange={updateTodoValue}></input>
-            <br></br><br></br>
-            <button onClick={addNewTask} >Add Task</button>
-            <br></br>
-            <br></br>
-            <br></br>
-            <hr></hr>
-            <h4>Task Todo</h4>
-            <ul>
-                {
-                    todos.map((todo) => (
-                        <li key={todo.id}>
-                            <span>{todo.task}</span>
-                            &nbsp;&nbsp;&nbsp;
-                            <button onClick={()=>deleteTodo(todo.id)}>Delete</button>
-                        </li>
-                    ))
-                }
-            </ul>
-        </div>
-    )
+    let upperCaseAll = () => {
+    setTodos((todos) =>
+        todos.map((todo) => {
+            return {
+                ...todo,
+                task: todo.task.toUpperCase(),
+            };
+        })
+    );
+};
+
+
+return (
+    <div>
+        <input placeholder="Add a task" value={newTodo} onChange={updateTodoValue}></input>
+        <br></br><br></br>
+        <button onClick={addNewTask} >Add Task</button>
+        <br></br>
+        <br></br>
+        <br></br>
+        <hr></hr>
+        <h4>Task Todo</h4>
+        <ul>
+            {
+                todos.map((todo) => (
+                    <li key={todo.id}>
+                        <span>{todo.task}</span>
+                        &nbsp;&nbsp;&nbsp;
+                        <button onClick={() => deleteTodo(todo.id)}>Delete</button>
+                    </li>
+                ))
+            }
+        </ul>
+        <br></br>
+        <button onClick={upperCaseAll}>Upper Case</button>
+    </div>
+)
 }
