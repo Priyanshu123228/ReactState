@@ -5,13 +5,14 @@ import TodoList from './TodoList'
 import Lottery from './Lottery'
 import TicketNum from './TicketNum'
 import Ticket from './Ticket'
+import Form from './Form'
 
 
 
 function App() {
   return (
     <>
-      <Lottery n={3} winningSum={15}/>
+      <Form/>
     </>
   )
 }
