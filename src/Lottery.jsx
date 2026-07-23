@@ -3,7 +3,7 @@ import { generateTicket, getSum } from "./helper";
 import Ticket from "./Ticket";
 
 export default function Lottery({n=3,winningSum=15}) {
-    const [ticket, setTicket] = useState([0, 0, 0]);
+    const [ticket, setTicket] = useState(generateTicket(n));
 
     function buyTicket() {
         setTicket(generateTicket(n));
