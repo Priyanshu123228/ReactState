@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Counter(){
     let [count,setCount]=useState(0);  //initialization
@@ -10,15 +10,15 @@ export default function Counter(){
         setCount((currCount)=>{
             return currCount+1;
         });
-         setCount((currCount)=>{
-            return currCount+1;
-        });
-        // console.log(`insider counterIncrease is : ${count}`);
     }
+         useEffect(function printSomething(){
+            console.log("this is the side effect");
+        },[]);
+
     return (
         <div>
             <h3>count={count}</h3>
-            <button onClick={counterIncrease}>Increase count</button>
+            <button onClick={counterIncrease}>+1</button>
         </div>
     );
 }
